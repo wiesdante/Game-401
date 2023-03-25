@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     [Header("If weapon type is DefaultGun")]
     public GameObject bulletPrefab;
 
-    [Header("If weapon type is BeamGun")] 
+    [Header("If weapon type is BeamGun")]
     public float maxLaserLenght;
     public GameObject laser;
     public LineRenderer lineRenderer;
@@ -39,12 +39,20 @@ public class Weapon : MonoBehaviour
     {
         _mainCamera = Camera.main;
         if(hasAnimator) _animator = GetComponent<Animator>();
-        laser.SetActive(false);
+        
+        if (weaponType == WeaponType.BeamGun)
+        {
+            laser.SetActive(false);
+        }
     }
 
     public void StartFire()
     {
-        laser.SetActive(true);
+        if (weaponType == WeaponType.BeamGun)
+        {
+            laser.SetActive(true);
+
+        }
     }
 
     public void Fire()
@@ -80,6 +88,10 @@ public class Weapon : MonoBehaviour
 
     public void StopFire()
     {
-        laser.SetActive(false);
+        if (weaponType == WeaponType.BeamGun)
+        {
+            laser.SetActive(false);
+
+        }
     }
 }
