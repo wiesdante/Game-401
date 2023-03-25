@@ -51,7 +51,6 @@ public class Weapon : MonoBehaviour
         if (weaponType == WeaponType.BeamGun)
         {
             laser.SetActive(true);
-
         }
     }
 
@@ -82,6 +81,14 @@ public class Weapon : MonoBehaviour
             if (hit)
             {
                 lineRenderer.SetPosition(1,(Vector2)hit.point);
+                if(hit.transform.CompareTag("Enemy"))
+                {
+                    if (_lastFireTime + fireRate < Time.time)
+                    {
+                        hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(weaponDamage);
+                        _lastFireTime = Time.time;
+                    }
+                }
             }
         }
     }
@@ -91,7 +98,6 @@ public class Weapon : MonoBehaviour
         if (weaponType == WeaponType.BeamGun)
         {
             laser.SetActive(false);
-
         }
     }
 }
