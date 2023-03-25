@@ -117,11 +117,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (fire.action.WasPressedThisFrame())
+        {
+            _currentWeapon.StartFire();
+        }
+        else if (fire.action.WasReleasedThisFrame())
+        {
+            _currentWeapon.StopFire();
+        }
+        
         if (fire.action.IsPressed())
         {
             if (Time.timeScale == 0) return;
             _currentWeapon.Fire();
         }
+        
     }
 
     private bool TryToMove(Vector2 direction)
