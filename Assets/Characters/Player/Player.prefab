@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055d783e45a00c648b0472c8dffa1014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 0
+  weaponDamage: 0
+  hasAnimator: 0
   bulletPrefab: {fileID: 0}
   weaponTip: {fileID: 0}
 --- !u!1 &5474683767096312095
@@ -178,7 +181,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,7 +210,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2937537100377656258
@@ -268,7 +271,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  weapons: []
   pointerPosition: {fileID: 0}
+  fire: {fileID: 0}
 --- !u!50 &6162067493196680765
 Rigidbody2D:
   serializedVersion: 4
@@ -363,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRenderer: {fileID: 5474683767096312089}
   weaponRenderer: {fileID: 0}
-  pointerPosition: {x: 0, y: 0}
+  mousePosition: {x: 0, y: 0}
 --- !u!1 &7213263463653315353
 GameObject:
   m_ObjectHideFlags: 0
