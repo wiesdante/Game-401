@@ -34,6 +34,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void StartQuest(string questDescription, string questName)
     {
+        if (_currentQuestName != "none") return;
         StopAllCoroutines();
         StartCoroutine(StartQuestIfPossible(questDescription, questName));
     }
