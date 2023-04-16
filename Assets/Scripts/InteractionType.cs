@@ -3,5 +3,6 @@ public enum InteractionType
     None,
     DialogueNpc,
     QuestDialogueNpc,
-    QuestItem
+    QuestItem,
+    WantedBoard
 }
