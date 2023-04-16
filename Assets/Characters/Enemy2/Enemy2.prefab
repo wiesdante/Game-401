@@ -271,6 +271,7 @@ MonoBehaviour:
   moveSpeed: 20
   maxHealth: 0
   healthBar: {fileID: 2068101133648662448}
+  damagedVersion: {fileID: 21300000, guid: 0fc7d37b77a9f3740a4f2338dfcb941e, type: 3}
 --- !u!50 &8262858534623676695
 Rigidbody2D:
   serializedVersion: 4
