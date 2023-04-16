@@ -98,6 +98,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleQuestWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""fde143cc-d5b8-497f-a0ce-dbdf8d08486d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -373,6 +382,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChangeWeapon3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11e210d6-ca8f-48b1-9473-a6178d7b96a2"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleQuestWindow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -968,6 +988,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_ChangeWeapon1 = m_Player.FindAction("ChangeWeapon1", throwIfNotFound: true);
         m_Player_ChangeWeapon2 = m_Player.FindAction("ChangeWeapon2", throwIfNotFound: true);
         m_Player_ChangeWeapon3 = m_Player.FindAction("ChangeWeapon3", throwIfNotFound: true);
+        m_Player_ToggleQuestWindow = m_Player.FindAction("ToggleQuestWindow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1047,6 +1068,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeWeapon1;
     private readonly InputAction m_Player_ChangeWeapon2;
     private readonly InputAction m_Player_ChangeWeapon3;
+    private readonly InputAction m_Player_ToggleQuestWindow;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1059,6 +1081,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @ChangeWeapon1 => m_Wrapper.m_Player_ChangeWeapon1;
         public InputAction @ChangeWeapon2 => m_Wrapper.m_Player_ChangeWeapon2;
         public InputAction @ChangeWeapon3 => m_Wrapper.m_Player_ChangeWeapon3;
+        public InputAction @ToggleQuestWindow => m_Wrapper.m_Player_ToggleQuestWindow;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1092,6 +1115,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeWeapon3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon3;
                 @ChangeWeapon3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon3;
                 @ChangeWeapon3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeWeapon3;
+                @ToggleQuestWindow.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleQuestWindow;
+                @ToggleQuestWindow.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleQuestWindow;
+                @ToggleQuestWindow.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleQuestWindow;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1120,6 +1146,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeWeapon3.started += instance.OnChangeWeapon3;
                 @ChangeWeapon3.performed += instance.OnChangeWeapon3;
                 @ChangeWeapon3.canceled += instance.OnChangeWeapon3;
+                @ToggleQuestWindow.started += instance.OnToggleQuestWindow;
+                @ToggleQuestWindow.performed += instance.OnToggleQuestWindow;
+                @ToggleQuestWindow.canceled += instance.OnToggleQuestWindow;
             }
         }
     }
@@ -1284,6 +1313,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnChangeWeapon1(InputAction.CallbackContext context);
         void OnChangeWeapon2(InputAction.CallbackContext context);
         void OnChangeWeapon3(InputAction.CallbackContext context);
+        void OnToggleQuestWindow(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

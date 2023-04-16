@@ -4,7 +4,14 @@ public class Interactable : MonoBehaviour
 {
    public InteractionType interactionType;
    private int _phase;
+   [Header("If Quest Dialogue Npc")] 
+   public string questNameForNpc;
+   public string questDescription;
+   [HideInInspector] public bool questConditionMet;
+   [Header("If Quest Item")] 
+   public string questNameForItem;
    public string questItemOf;
+
 
 
    private void OnTriggerEnter2D(Collider2D other)
@@ -31,13 +38,28 @@ public class Interactable : MonoBehaviour
       if (interactionType == InteractionType.DialogueNpc)
       {
          GetComponent<DialogueStarter>().TriggerDialogue(_phase);
-         //return;
+      }
+      else if (interactionType == InteractionType.QuestDialogueNpc)
+      {
+         GetComponent<DialogueStarter>().TriggerDialogue(_phase);
+         if (questConditionMet)
+         {
+            QuestManager.Instance.FinishQuest(questNameForNpc);
+         }
+         else
+         {
+            QuestManager.Instance.StartQuest(questDescription,questNameForNpc);
+         }
       }
       else if (interactionType == InteractionType.QuestItem)
       {
-         GetComponent<DialogueStarter>().TriggerDialogue(_phase);
-         GameObject.FindWithTag("Nemo").GetComponent<Interactable>().NextPhase();
-         Destroy(this.gameObject);
+         if (questNameForItem == QuestManager.Instance.GetCurrentQuestName())
+         {
+            GetComponent<DialogueStarter>().TriggerDialogue(_phase);
+            GameObject.FindWithTag(questItemOf).GetComponent<Interactable>().NextPhase();
+            GameObject.FindWithTag(questItemOf).GetComponent<Interactable>().questConditionMet = true;
+            Destroy(this.gameObject);
+         }
       }
    }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -181,6 +182,18 @@ public class Player : MonoBehaviour
         weapons[1].gameObject.SetActive(false);;
         weapons[2].gameObject.SetActive(true);
         _currentWeapon = weapons[2];
+    }
+
+    public void OnToggleQuestWindow()
+    {
+        if (Math.Abs(QuestManager.Instance.questListBox.alpha - 1) < 0.05f)
+        {
+            QuestManager.Instance.QuestListBoxToggle(false);
+        }
+        else if(QuestManager.Instance.GetCurrentQuestName() != "none")
+        {
+            QuestManager.Instance.QuestListBoxToggle(true);
+        }
     }
 
     private Vector2 GetMousePositionOnWorld()
