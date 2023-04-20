@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,10 @@ public class Enemy : MonoBehaviour
     public HealthBar healthBar;
     private float _currentHealth;
 
+    private SpriteRenderer _spriteRenderer;
+    private Sprite _normalVersion;
+    public Sprite damagedVersion;
+
     private void Start()
     {
         _currentHealth = maxHealth;
@@ -25,6 +30,9 @@ public class Enemy : MonoBehaviour
         _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.updateUpAxis = false;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _normalVersion = _spriteRenderer.sprite;
     }
 
     private void FixedUpdate()
@@ -65,6 +73,16 @@ public class Enemy : MonoBehaviour
         else
         {
             healthBar.InformHealthBar(_currentHealth,maxHealth);
+            StopAllCoroutines();
+            StartCoroutine(ChangeSpriteToDamaged(0.05f));
         }
+    }
+
+    IEnumerator ChangeSpriteToDamaged(float changeBackDelay)
+    {
+        _spriteRenderer.sprite = damagedVersion;
+        yield return new WaitForSeconds(changeBackDelay);
+        _spriteRenderer.sprite = _normalVersion;
+
     }
 }

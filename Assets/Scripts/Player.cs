@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -117,11 +118,21 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (fire.action.WasPressedThisFrame())
+        {
+            _currentWeapon.StartFire();
+        }
+        else if (fire.action.WasReleasedThisFrame())
+        {
+            _currentWeapon.StopFire();
+        }
+        
         if (fire.action.IsPressed())
         {
             if (Time.timeScale == 0) return;
             _currentWeapon.Fire();
         }
+        
     }
 
     private bool TryToMove(Vector2 direction)
@@ -171,6 +182,18 @@ public class Player : MonoBehaviour
         weapons[1].gameObject.SetActive(false);;
         weapons[2].gameObject.SetActive(true);
         _currentWeapon = weapons[2];
+    }
+
+    public void OnToggleQuestWindow()
+    {
+        if (Math.Abs(QuestManager.Instance.questListBox.alpha - 1) < 0.05f)
+        {
+            QuestManager.Instance.QuestListBoxToggle(false);
+        }
+        else if(QuestManager.Instance.GetCurrentQuestName() != "none")
+        {
+            QuestManager.Instance.QuestListBoxToggle(true);
+        }
     }
 
     private Vector2 GetMousePositionOnWorld()
