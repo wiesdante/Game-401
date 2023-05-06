@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     private WeaponParent _currentWeaponParent;
     private Weapon _currentWeapon;
     public Weapon[] weapons;
-    private GameObject _currentInteractableGameObject;
-    
+    private Interactable _currentInteractable;
+
     // Input related
     [SerializeField]
     private InputActionReference pointerPosition, fire;
@@ -156,8 +156,8 @@ public class Player : MonoBehaviour
 
     public void OnInteract()
     {
-        if (_currentInteractableGameObject == null) return;
-        _currentInteractableGameObject.GetComponent<Interactable>().Interact();
+        if (_currentInteractable == null) return;
+        _currentInteractable.Interact();
     }
 
     public void OnChangeWeapon1()
@@ -212,9 +212,9 @@ public class Player : MonoBehaviour
         return Camera.main.ScreenToViewportPoint(mousePos);
     }
     
-    public void SetCurrentInteractableGameObject(GameObject obj)
+    public void SetCurrentInteractableGameObject(Interactable obj)
     {
-        _currentInteractableGameObject = obj;
+        _currentInteractable = obj;
         
     }
     

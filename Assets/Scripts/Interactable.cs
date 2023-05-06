@@ -1,25 +1,21 @@
+using NPCs;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-   public InteractionType interactionType;
-   private int _phase;
-   [Header("If Quest Dialogue Npc")] 
-   public string questNameForNpc;
-   public string questDescription;
-   [HideInInspector] public bool questConditionMet;
-   [Header("If Quest Item")] 
-   public string questNameForItem;
-   public string questItemOf;
+   private string _interactableName;
 
-
+   private void Start()
+   {
+      _interactableName = gameObject.name;
+   }
 
    private void OnTriggerEnter2D(Collider2D other)
    {
       if (other.CompareTag("Player"))
       {
          UIManager.Instance.ShowInteractionText(true);
-         other.GetComponent<Player>().SetCurrentInteractableGameObject(this.gameObject);
+         other.GetComponent<Player>().SetCurrentInteractableGameObject(this);
       }
    }
 
@@ -34,38 +30,18 @@ public class Interactable : MonoBehaviour
 
    public void Interact()
    {
-      UIManager.Instance.ShowInteractionText(false);
-      if (interactionType == InteractionType.DialogueNpc)
+      switch (_interactableName)
       {
-         GetComponent<DialogueStarter>().TriggerDialogue(_phase);
-      }
-      else if (interactionType == InteractionType.QuestDialogueNpc)
-      {
-         GetComponent<DialogueStarter>().TriggerDialogue(_phase);
-         if (questConditionMet)
-         {
-            QuestManager.Instance.FinishQuest(questNameForNpc);
-         }
-         else
-         {
-            QuestManager.Instance.StartQuest(questDescription,questNameForNpc);
-         }
-      }
-      else if (interactionType == InteractionType.QuestItem)
-      {
-         if (questNameForItem == QuestManager.Instance.GetCurrentQuestName())
-         {
-            GetComponent<DialogueStarter>().TriggerDialogue(_phase);
-            GameObject.FindWithTag(questItemOf).GetComponent<Interactable>().NextPhase();
-            GameObject.FindWithTag(questItemOf).GetComponent<Interactable>().questConditionMet = true;
-            Destroy(this.gameObject);
-         }
+         case "Nemo":
+            gameObject.GetComponent<Nemo>().Interact();
+            UIManager.Instance.ShowInteractionText(false);
+            break;
+         case "Nemo_Leg_Interactable":
+            gameObject.GetComponent<Nemo_Leg_Interactable>().Interact();
+            UIManager.Instance.ShowInteractionText(false);
+            break;
+         default:
+            break;
       }
    }
-
-   public void NextPhase()
-   {
-      _phase++;
-   }
-
 }

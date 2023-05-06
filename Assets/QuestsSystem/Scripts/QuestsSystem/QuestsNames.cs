@@ -6,9 +6,9 @@ namespace QuestsSystem
 		FindJoe,
 		GetAthleticLikeEren,
 		GoToTheVillage,
-		HelloUpdate,
 		StevesFlower,
 		TalkToJoe,
-		WelcomeToTheVillage
+		WelcomeToTheVillage,
+		NemosLeg
     }
 }
