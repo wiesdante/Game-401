@@ -40,6 +40,14 @@ public class Interactable : MonoBehaviour
             gameObject.GetComponent<Nemo_Leg_Interactable>().Interact();
             UIManager.Instance.ShowInteractionText(false);
             break;
+         case "Tary":
+            gameObject.GetComponent<Tary>().Interact();
+            UIManager.Instance.ShowInteractionText(false);
+            break;
+         case "Arthur":
+            gameObject.GetComponent<Arthur>().Interact();
+            UIManager.Instance.ShowInteractionText(false);
+            break;
          default:
             break;
       }

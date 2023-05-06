@@ -15,11 +15,11 @@ namespace NPCs
                     dialoguePhase++;
                     break;
                 case 1:
-                    gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
                     break;
                 case 2:
                     gameObject.GetComponent<DialogueStarter>().TriggerDialogue(1);
                     QuestManager.Instance.FinishQuest("NemosLeg");
+                    QuestManager.Instance.mainQuestPhase++;
                     dialoguePhase++;
                     break;
                 case 3:

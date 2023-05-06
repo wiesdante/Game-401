@@ -13,7 +13,9 @@ public class DialogueManager : Singleton<DialogueManager>
     public Animator animator;
 
     private bool _typing;
+    public bool inDialogue;
     private string[] _splitVersion;
+    
     
     
     private static readonly int IsOpen = Animator.StringToHash("IsOpen");
@@ -28,6 +30,7 @@ public class DialogueManager : Singleton<DialogueManager>
         Time.timeScale = 0f;
         animator.SetBool(IsOpen,true);
         _sentences.Clear();
+        inDialogue = true;
 
         foreach (string str in dialogue)
         {
@@ -77,5 +80,6 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         Time.timeScale = 1f;
         animator.SetBool(IsOpen,false);
+        inDialogue = false;
     }
 }

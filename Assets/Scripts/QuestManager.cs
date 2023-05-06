@@ -6,6 +6,7 @@ using UnityEngine;
 public class QuestManager : Singleton<QuestManager>
 {
     public CanvasGroup questListBox;
+    public int mainQuestPhase = 0;
     private bool _questListBoxIsVisible;
 
     public TextMeshProUGUI questDescriptionText;

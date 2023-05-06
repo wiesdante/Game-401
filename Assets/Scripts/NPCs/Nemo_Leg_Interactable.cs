@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace NPCs
@@ -11,8 +12,17 @@ namespace NPCs
             {
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
                 nemo.GetComponent<Nemo>().dialoguePhase++;
-                Destroy(this.gameObject);
+                StartCoroutine(FunctionsAfterDialogue());
             }
+        }
+
+        IEnumerator FunctionsAfterDialogue()
+        {
+            while (DialogueManager.Instance.inDialogue)
+            {
+                yield return null;
+            }
+            Destroy(this.gameObject);
         }
     }
 }
