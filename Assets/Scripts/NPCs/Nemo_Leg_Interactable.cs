@@ -8,21 +8,24 @@ namespace NPCs
         public void Interact()
         {
             GameObject nemo = GameObject.FindWithTag("Nemo");
-            if (nemo.GetComponent<Nemo>().dialoguePhase == 1)
+            if (QuestManager.Instance.mainQuestPhase == 1)
             {
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
-                nemo.GetComponent<Nemo>().dialoguePhase++;
                 StartCoroutine(FunctionsAfterDialogue());
             }
         }
 
         IEnumerator FunctionsAfterDialogue()
         {
-            while (DialogueManager.Instance.inDialogue)
+            if (QuestManager.Instance.mainQuestPhase == 1)
             {
-                yield return null;
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+                QuestManager.Instance.mainQuestPhase++;
+                Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
         }
     }
 }
