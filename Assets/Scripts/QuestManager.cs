@@ -11,7 +11,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public TextMeshProUGUI questDescriptionText;
 
-    private string _currentQuestName;
+    public string _currentQuestName;
 
     private void Start()
     {

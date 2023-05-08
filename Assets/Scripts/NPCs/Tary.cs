@@ -12,6 +12,16 @@ namespace NPCs
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
                 StartCoroutine(FunctionsAfterDialogue());
             }
+            else if (QuestManager.Instance.mainQuestPhase == 5)
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(1);
+                StartCoroutine(FunctionsAfterDialogue());
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 7)
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(2);
+                StartCoroutine(FunctionsAfterDialogue());
+            }
         }
         
         IEnumerator FunctionsAfterDialogue()
@@ -23,7 +33,24 @@ namespace NPCs
                     yield return null;
                 }
                 QuestManager.Instance.mainQuestPhase++;
-                gameObject.SetActive(false);
+                //Tary needs to go to exit of the evil cyborg area.
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 5)
+            {
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+                QuestManager.Instance.StartQuest("Kill the evil cyborgs and save the man!","mission1eclipse");
+                QuestManager.Instance.mainQuestPhase++;
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 7)
+            {
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+                QuestManager.Instance.mainQuestPhase++;
             }
         }
     }
