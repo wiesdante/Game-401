@@ -22,6 +22,11 @@ namespace NPCs
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(2);
                 StartCoroutine(FunctionsAfterDialogue());
             }
+            else if (QuestManager.Instance.mainQuestPhase == 8)
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(4);
+                StartCoroutine(FunctionsAfterDialogue());
+            }
         }
         
         IEnumerator FunctionsAfterDialogue()
@@ -51,6 +56,17 @@ namespace NPCs
                     yield return null;
                 }
                 QuestManager.Instance.mainQuestPhase++;
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(3);
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 8)
+            {
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+                QuestManager.Instance.mainQuestPhase++;
+                QuestManager.Instance.StartQuest("Deliver the package to Eclipse, at night!","mission2eclipse");
+
             }
         }
     }

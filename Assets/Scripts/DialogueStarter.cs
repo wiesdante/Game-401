@@ -11,6 +11,21 @@ public class DialogueStarter : MonoBehaviour
     public string[] dialogue2;
     [TextArea(3, 10)] 
     public string[] dialogue3;
+    [TextArea(3, 10)] 
+    public string[] dialogue4;
+    [TextArea(3, 10)] 
+    public string[] dialogue5;
+    [TextArea(3, 10)] 
+    public string[] dialogue6;
+    [TextArea(3, 10)] 
+    public string[] dialogue7;
+    [TextArea(3, 10)] 
+    public string[] dialogue8;
+    [TextArea(3, 10)] 
+    public string[] dialogue9;
+    [TextArea(3, 10)] 
+    public string[] dialogue10;
+    
 
     private List<string[]> dialogues;
 
@@ -21,6 +36,15 @@ public class DialogueStarter : MonoBehaviour
         dialogues.Add(dialogue1);
         dialogues.Add(dialogue2);
         dialogues.Add(dialogue3);
+        dialogues.Add(dialogue4);
+        dialogues.Add(dialogue5);
+        dialogues.Add(dialogue6);
+        dialogues.Add(dialogue7);
+        dialogues.Add(dialogue8);
+        dialogues.Add(dialogue9);
+        dialogues.Add(dialogue10);
+
+        
     }
 
 

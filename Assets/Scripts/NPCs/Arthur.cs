@@ -22,6 +22,12 @@ namespace NPCs
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(3);
                 StartCoroutine(FunctionsAfterDialogue());
             }
+            else if (QuestManager.Instance.mainQuestPhase == 8)
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(5);
+                StartCoroutine(FunctionsAfterDialogue());
+            }
+
         }
 
         IEnumerator FunctionsAfterDialogue()
@@ -54,6 +60,18 @@ namespace NPCs
 
                 QuestManager.Instance.mainQuestPhase++;
                 //Arthur leaves the area
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(4);
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 8)
+            {
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+
+                QuestManager.Instance.mainQuestPhase++;
+                QuestManager.Instance.StartQuest("Deliver the package to ReGen, at night!","mission2regen");
+
             }
         }
     }
