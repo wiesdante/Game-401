@@ -7,6 +7,9 @@ TagManager:
   - Bullet
   - Enemy
   - Nemo
+  - DapperHouseSpawnPoint
+  - DapperHouseExitPoint
+  - DapperHouseEnterPoint
   layers:
   - Default
   - TransparentFX
