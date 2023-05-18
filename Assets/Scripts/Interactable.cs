@@ -48,6 +48,10 @@ public class Interactable : MonoBehaviour
             gameObject.GetComponent<Arthur>().Interact();
             UIManager.Instance.ShowInteractionText(false);
             break;
+         case "Yonder":
+            gameObject.GetComponent<Yonder>().Interact();
+            UIManager.Instance.ShowInteractionText(false);
+            break;
          default:
             break;
       }

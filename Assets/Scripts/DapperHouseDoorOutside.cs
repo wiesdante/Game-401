@@ -6,8 +6,18 @@ public class DapperHouseDoorOutside : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.transform.position =
-                GameObject.FindWithTag("DapperHouseEnterPoint").gameObject.transform.position;
+            if (QuestManager.Instance.mainQuestPhase == 8)
+            {
+                other.gameObject.transform.position =
+                    GameObject.FindWithTag("DapperHouseSpawnPoint").gameObject.transform.position;
+                QuestManager.Instance.FinishQuest("sleepaftermission1");
+            }
+            else
+            {
+                other.gameObject.transform.position =
+                    GameObject.FindWithTag("DapperHouseEnterPoint").gameObject.transform.position;
+            }
+            
         }
     }
 }

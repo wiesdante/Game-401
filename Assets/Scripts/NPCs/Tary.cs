@@ -22,7 +22,7 @@ namespace NPCs
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(2);
                 StartCoroutine(FunctionsAfterDialogue());
             }
-            else if (QuestManager.Instance.mainQuestPhase == 8)
+            else if (QuestManager.Instance.mainQuestPhase == 10)
             {
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(4);
                 StartCoroutine(FunctionsAfterDialogue());
@@ -57,8 +57,9 @@ namespace NPCs
                 }
                 QuestManager.Instance.mainQuestPhase++;
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(3);
+                QuestManager.Instance.StartQuest("Go back to your home.","sleepaftermission1");
             }
-            else if (QuestManager.Instance.mainQuestPhase == 8)
+            else if (QuestManager.Instance.mainQuestPhase == 10)
             {
                 while (DialogueManager.Instance.inDialogue)
                 {
