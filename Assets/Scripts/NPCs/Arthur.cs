@@ -5,6 +5,8 @@ namespace NPCs
 {
     public class Arthur : MonoBehaviour
     {
+        public Transform[] teleportPoints;
+        
         public void Interact()
         {
             if (QuestManager.Instance.mainQuestPhase == 4)
@@ -27,6 +29,11 @@ namespace NPCs
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(5);
                 StartCoroutine(FunctionsAfterDialogue());
             }
+            else if (QuestManager.Instance.mainQuestPhase == 12)
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(6);
+                StartCoroutine(FunctionsAfterDialogue());
+            }
 
         }
 
@@ -40,7 +47,7 @@ namespace NPCs
                 }
                 QuestManager.Instance.mainQuestPhase++;
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(1);
-                //Arthur needs to go to entrance of the evil cyborg area.
+                transform.position = teleportPoints[0].transform.position;
             }
             else if (QuestManager.Instance.mainQuestPhase == 5)
             {
@@ -48,8 +55,9 @@ namespace NPCs
                 {
                     yield return null;
                 }
-                QuestManager.Instance.StartQuest("Destroy the blue cyborg!","mission1regen");
+                QuestManager.Instance.StartQuest("Kill the evil cyborgs in the area!","mission1regen");
                 QuestManager.Instance.mainQuestPhase++;
+                QuestManager.Instance.SetMobs(1);
             }
             else if (QuestManager.Instance.mainQuestPhase == 7)
             {
@@ -59,7 +67,9 @@ namespace NPCs
                 }
 
                 QuestManager.Instance.mainQuestPhase++;
-                //Arthur leaves the area
+                transform.position = teleportPoints[1].transform.position;
+                var arthur = GameObject.FindWithTag("Tary");
+                arthur.transform.position = arthur.GetComponent<Tary>().teleportPoints[1].transform.position;
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(4);
                 QuestManager.Instance.StartQuest("Go back to your home.","sleepaftermission1");
             }
@@ -71,7 +81,20 @@ namespace NPCs
                 }
 
                 QuestManager.Instance.mainQuestPhase++;
-                QuestManager.Instance.StartQuest("Deliver the package to ReGen, at night!","mission2regen");
+                QuestManager.Instance.StartQuest("Take the package from the warehouse, and return it to Arthur!","mission2regen");
+
+            }
+            else if (QuestManager.Instance.mainQuestPhase == 12)
+            {
+                while (DialogueManager.Instance.inDialogue)
+                {
+                    yield return null;
+                }
+
+                QuestManager.Instance.mainQuestPhase++;
+                QuestManager.Instance.FinishQuest("mission2part2");
+                QuestManager.Instance.StartQuest("Go to the robot graveyard and bring back the ReGen cargo.","mission3regen");
+                QuestManager.Instance.SetMobs(2);
 
             }
         }
