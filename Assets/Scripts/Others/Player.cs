@@ -25,13 +25,14 @@ public class Player : MonoBehaviour
     private WeaponParent _currentWeaponParent;
     private Weapon _currentWeapon;
     public Weapon[] weapons;
-    private Interactable _currentInteractable;
+
 
     // Input related
     [SerializeField]
     private InputActionReference pointerPosition, fire;
     private Vector2 _mousePositionOnWorld; // On World Coordinates
     private Vector2 _mousePositionOnScreen; // On Screen Coordinates
+    private Interactable _currentInteractable;
 
     // Animation related
     private Animator _animator;
@@ -142,6 +143,15 @@ public class Player : MonoBehaviour
             _currentWeapon.Fire();
         }
         
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _currentWeapon.Reload();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            UIManager.Instance.ToggleMap();
+        }
     }
 
     public void TakeDamage(float amount)

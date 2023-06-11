@@ -106,6 +106,8 @@ namespace NPCs
                 QuestManager.Instance.mainQuestPhase++;
                 QuestManager.Instance.FinishQuest("mission3eclipse");
                 QuestManager.Instance.StartQuest("Go inside the ReGen building to save your sister!","mission4eclipse");
+                var arthur = GameObject.FindWithTag("Arthur");
+                arthur.transform.position = arthur.GetComponent<Arthur>().teleportPoints[2].transform.position;
                 transform.position = teleportPoints[2].transform.position;
             }
         }

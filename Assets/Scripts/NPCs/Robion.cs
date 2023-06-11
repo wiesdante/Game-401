@@ -9,7 +9,15 @@ public class Robion : MonoBehaviour
     {
         if (QuestManager.Instance.mainQuestPhase == 15)
         {
-            gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
+            if (QuestManager.Instance._currentQuestName == "mission4eclipse")
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(0);
+            }
+            else if (QuestManager.Instance._currentQuestName == "mission4regen")
+            {
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(2);
+            }
+
 
             StartCoroutine(FunctionsAfterDialogue());
         }
@@ -25,10 +33,22 @@ public class Robion : MonoBehaviour
 
         if (QuestManager.Instance.mainQuestPhase == 15)
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            gameObject.GetComponent<DialogueStarter>().TriggerDialogue(1);
-            StartCoroutine(FunctionsAfterDialogue());
+            if (QuestManager.Instance._currentQuestName == "mission4regen")
+            {
+                GameObject.FindWithTag("Clarie").SetActive(false);
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(3);
+                QuestManager.Instance.mainQuestPhase++;
+                StartCoroutine(FunctionsAfterDialogue());
+            }
+            else if (QuestManager.Instance._currentQuestName == "mission4eclipse")
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                gameObject.GetComponent<DialogueStarter>().TriggerDialogue(1);
+                QuestManager.Instance.mainQuestPhase++;
+                StartCoroutine(FunctionsAfterDialogue());
+            }
+            
         }
         else if (QuestManager.Instance.mainQuestPhase == 16)
         {

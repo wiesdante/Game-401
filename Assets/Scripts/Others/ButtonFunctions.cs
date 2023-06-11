@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
     public void PlayButtonFunction()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        BGMManager.Instance.ChangeMusic();
     }
 
     public void QuitButtonFunction()

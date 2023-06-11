@@ -68,8 +68,8 @@ namespace NPCs
 
                 QuestManager.Instance.mainQuestPhase++;
                 transform.position = teleportPoints[1].transform.position;
-                var arthur = GameObject.FindWithTag("Tary");
-                arthur.transform.position = arthur.GetComponent<Tary>().teleportPoints[1].transform.position;
+                var tary = GameObject.FindWithTag("Tary");
+                tary.transform.position = tary.GetComponent<Tary>().teleportPoints[1].transform.position;
                 gameObject.GetComponent<DialogueStarter>().TriggerDialogue(4);
                 QuestManager.Instance.StartQuest("Go back to your home.","sleepaftermission1");
             }
